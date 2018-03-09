@@ -28,13 +28,17 @@ function PasswordCheck() {
 
 }
 
-function calculatePasswordStrength(password) {
+let PasswordStrength=document.getElementById("PasswordStrength");
 
+function calculatePasswordStrength(password) {
+console.log(password.length);
     //total score of password
     let iPasswordScore = 0;
 
-    if (password.length < 8)
-        return 0;
+    if (password.length < 8){
+    PasswordStrength.innerHTML= 0;
+    return;
+    }
     else if (password.length >= 10)
         iPasswordScore += 2;
     else
@@ -56,7 +60,6 @@ function calculatePasswordStrength(password) {
     if (password.match("(?=.*[~!@#$%^&*()_-]).*"))
         iPasswordScore += 2;
 
-    return iPasswordScore;
+        PasswordStrength.innerHTML= iPasswordScore;
 
 }
-PasswordCheck();
