@@ -5,15 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+
 </head>
 <body>
   <center>
-  <input type="text" onchange="calculatePasswordStrength(this.value)">
+  <input type="text" id="PasswordField" pattern="[0-9]" >
   <br>
   <br>
-  <label id="PasswordStrength" for=""></label>
+  <input type="checkbox" id="AdvancedMode">advanced mode
+  <br>
+  <br>
+  <button onclick='calculatePasswordStrength(document.getElementById("PasswordField"));' >Check Password</button>
+  <br>
+  <br>
+  <label id="PasswordStrength"></label>
 </center>
 
 <script src="index.js"></script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+
 </body>
 </html>
