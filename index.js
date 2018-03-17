@@ -32,16 +32,22 @@ let PasswordStrength = document.getElementById("PasswordStrength");
 let PasswordField = document.getElementById("PasswordField");
 let AdvancedMode = document.getElementById("AdvancedMode");
 
+let Digit = document.getElementById("Digit");
+let LowerCaseLetter = document.getElementById("LowerCaseLetter");
+let UpperCaseLetter = document.getElementById("UpperCaseLetter");
+let SpecialCharacter = document.getElementById("SpecialCharacter");
+
+let Warning = document.getElementById("Warning");
+
 function calculatePasswordStrength(password) {
     password = password.value;
-    console.log(password.length);
     //total score of password
     let iPasswordScore = 0;
 
-
+    CountPassword(password);
 
     if (password.length < 8) {
-        PasswordStrength.textContent = "Password Strength: " + 0;
+        PasswordStrength.innerHTML = "Password Strength: " + 0;
         return;
     }
     else if (password.length >= 10)
@@ -51,7 +57,7 @@ function calculatePasswordStrength(password) {
 
     if (AdvancedMode.checked) {
         if (CommonPassword(password)) {
-            PasswordStrength.textContent = "Password Strength: " + 0;
+            PasswordStrength.innerHTML = "Password Strength: " + 0;
             return;
         }
     }
@@ -72,7 +78,7 @@ function calculatePasswordStrength(password) {
     if (password.match("(?=.*[~!@#$%^&*()_-]).*"))
         iPasswordScore += 2;
 
-    PasswordStrength.textContent = "Password Strength: " + iPasswordScore;
+    PasswordStrength.innerHTML = "Password Strength: " + iPasswordScore;
 
 }
 
@@ -80,11 +86,11 @@ function calculatePasswordStrength(password) {
 function CommonPassword(Password) {
 
     let CommonPasswords = require('./CommonPasswords.json'); //(with path)
-    let count =0
+    let count = 0
     for (const index in CommonPasswords) {
         console.log(CommonPasswords[index].length);
-        if(CommonPasswords[index].length<8){
-            console.log(CommonPasswords[index]+"---"+CommonPasswords[index].length);
+        if (CommonPasswords[index].length < 8) {
+            console.log(CommonPasswords[index] + "---" + CommonPasswords[index].length);
             count++;
         }
         if (CommonPasswords[index] == Password) {
@@ -93,7 +99,50 @@ function CommonPassword(Password) {
         }
         // console.log(CommonPasswords[index]);
     }
-    console.log("less than 8 letters"+count);
+    console.log("less than 8 letters" + count);
     return false;
-   
+
+}
+
+function CountPassword(Password) {
+    let DigitCount = 0;
+    let LowerCaseLetterCount = 0;
+    let UpperCaseLetterCount = 0;
+    let SpecialCharacterCount = 0;
+
+    for (const index in Password) {
+        if (Password[index].match("(?=.*[0-9]).*"))
+            DigitCount++;
+
+        else if (Password[index].match("(?=.*[a-z]).*"))
+            LowerCaseLetterCount++;
+
+        else if (Password[index].match("(?=.*[A-Z]).*"))
+            UpperCaseLetterCount++;
+
+        else if (Password[index].match("(?=.*[~!@#$%^&*()_-]).*"))
+            SpecialCharacterCount++;
+    }
+
+    Digit.innerHTML = "Digits: " + DigitCount;
+    LowerCaseLetter.innerHTML = "lower case letteres: " + LowerCaseLetterCount;
+    UpperCaseLetter.innerHTML = "Upper case letteres: " + UpperCaseLetterCount;
+    SpecialCharacter.innerHTML = "Special Characteres: " + SpecialCharacterCount;
+
+    if (DigitCount < 1 || LowerCaseLetterCount < 1 || UpperCaseLetterCount < 1 || SpecialCharacterCount < 1)
+        WarningCheck(DigitCount, LowerCaseLetterCount, UpperCaseLetterCount, SpecialCharacterCount);
+    else
+        Warning.innerHTML = "Warning<br>None";
+}
+
+function WarningCheck(DigitCount, LowerCaseLetterCount, UpperCaseLetterCount, SpecialCharacterCount) {
+
+    let NewWarning = "Warning<br>";
+
+    DigitCount < 1 ? NewWarning+="digits<br>":"";
+    LowerCaseLetterCount <1 ? NewWarning+="Lower Case Letter<br>":"";
+    UpperCaseLetterCount <1 ? NewWarning+="Upper Case Letter<br>":"";
+    SpecialCharacterCount <1 ? NewWarning+="Special Character<br>":"";
+
+    Warning.innerHTML=NewWarning;
 }
