@@ -38,8 +38,10 @@ let UpperCaseLetter = document.getElementById("UpperCaseLetter");
 let SpecialCharacter = document.getElementById("SpecialCharacter");
 
 let Warning = document.getElementById("Warning");
+let CommonPasswordText=document.getElementById("CommonPassword");
 
 function calculatePasswordStrength(password) {
+<<<<<<< HEAD
   password = password.value;
   //total score of password
   let iPasswordScore = 0;
@@ -60,6 +62,29 @@ function calculatePasswordStrength(password) {
       PasswordStrength.innerHTML = "Password Strength: " + 0;
       PasswordStrengthBar.innerHTML = "<div class='determinate' style='width: 0%' id='progressBar'></div>";
       return;
+=======
+    CommonPasswordText.innerHTML="";
+    //total score of password
+    let iPasswordScore = 0;
+
+    CountPassword(password);
+
+    if (password.length < 8) {
+        PasswordStrength.innerHTML = "Password Strength: " + 0;
+        return;
+    }
+    else if (password.length >= 10)
+        iPasswordScore += 2;
+    else
+        iPasswordScore += 1;
+
+    if (AdvancedMode.checked) {
+        if (CommonPassword(password)) {
+            PasswordStrength.innerHTML = "Password Strength: " + 0;
+            CommonPasswordText.innerHTML="Common Password";
+            return;
+        }
+>>>>>>> 19a55b8ae79b16261b0722c536e9a57a56c14a0c
     }
   }
 
@@ -88,6 +113,7 @@ function calculatePasswordStrength(password) {
 
 function CommonPassword(Password) {
 
+<<<<<<< HEAD
   let CommonPasswords = require('./CommonPasswords.json'); //(with path)
   let count = 0
   for (const index in CommonPasswords) {
@@ -104,6 +130,16 @@ function CommonPassword(Password) {
   }
   console.log("less than 8 letters" + count);
   return false;
+=======
+    let CommonPasswords = require('./CommonPasswords.json'); 
+    for (const index in CommonPasswords) {
+        if (CommonPasswords[index] == Password) {
+            console.log("matches");
+            return true;
+        }
+    }
+    return false;
+>>>>>>> 19a55b8ae79b16261b0722c536e9a57a56c14a0c
 
 }
 

@@ -13,6 +13,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
   <div class="container">
     <center>
       <h1>PassWord Checker</h1>
@@ -62,6 +63,29 @@
             <h5 id="UpperCaseLetter">Upper case letteres:</h5>
             <h5 id="SpecialCharacter">Special Characteres:</h5>
           </div>
+=======
+  <center>
+  <input type="text" id="PasswordField" pattern="[0-9]" >
+  <br>
+  <br>
+  <input type="checkbox" id="AdvancedMode">advanced mode
+  <br>
+  <br>
+  <button onclick='calculatePasswordStrength(document.getElementById("PasswordField").value);' >Check Password</button>
+  <br>
+  <br>
+  <label id="PasswordStrength">Password Strength: 0</label><br><br>
+  <label id="Digit">Digits: 0</label><br>
+  <label id="LowerCaseLetter">lower case letteres: 0</label><br>
+  <label id="UpperCaseLetter">Upper case letteres: 0</label><br>
+  <label id="SpecialCharacter">Special Characteres: 0</label><br>
+  <p id="Warning">Warning<br>None</p>
+  <p id="CommonPassword"></p>
+</center>
+
+<script src="index.js"></script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+>>>>>>> 19a55b8ae79b16261b0722c536e9a57a56c14a0c
 
           <div class=" orange col m4 card small">
             <h5 id="Warning">Warnings</h5>
