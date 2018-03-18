@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <!--Import materialize.css-->
   <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
-<link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
@@ -13,7 +13,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
   <div class="container">
     <center>
       <h1>PassWord Checker</h1>
@@ -51,46 +50,23 @@
       <a class="waves-effect waves-light btn-large" onclick='checkPassword()'>Check Password</a>
 
       <div class="progress">
-          <div class="determinate" id='progressBar'></div>
+        <div class="determinate" id='progressBar'></div>
       </div>
+
       <h5 id="PasswordStrength"></h5>
+
       <div class="row">
         <div class="col m12">
-
           <div class=" teal col m4 card small">
             <h5 id="Digit">Digits:</h5>
             <h5 id="LowerCaseLetter">lower case letteres:</h5>
             <h5 id="UpperCaseLetter">Upper case letteres:</h5>
             <h5 id="SpecialCharacter">Special Characteres:</h5>
           </div>
-=======
-  <center>
-  <input type="text" id="PasswordField" pattern="[0-9]" >
-  <br>
-  <br>
-  <input type="checkbox" id="AdvancedMode">advanced mode
-  <br>
-  <br>
-  <button onclick='calculatePasswordStrength(document.getElementById("PasswordField").value);' >Check Password</button>
-  <br>
-  <br>
-  <label id="PasswordStrength">Password Strength: 0</label><br><br>
-  <label id="Digit">Digits: 0</label><br>
-  <label id="LowerCaseLetter">lower case letteres: 0</label><br>
-  <label id="UpperCaseLetter">Upper case letteres: 0</label><br>
-  <label id="SpecialCharacter">Special Characteres: 0</label><br>
-  <p id="Warning">Warning<br>None</p>
-  <p id="CommonPassword"></p>
-</center>
-
-<script src="index.js"></script>
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
->>>>>>> 19a55b8ae79b16261b0722c536e9a57a56c14a0c
 
           <div class=" orange col m4 card small">
             <h5 id="Warning">Warnings</h5>
           </div>
-
         </div>
       </div>
 
