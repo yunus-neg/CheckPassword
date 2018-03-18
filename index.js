@@ -38,9 +38,10 @@ let UpperCaseLetter = document.getElementById("UpperCaseLetter");
 let SpecialCharacter = document.getElementById("SpecialCharacter");
 
 let Warning = document.getElementById("Warning");
+let CommonPasswordText=document.getElementById("CommonPassword");
 
 function calculatePasswordStrength(password) {
-    password = password.value;
+    CommonPasswordText.innerHTML="";
     //total score of password
     let iPasswordScore = 0;
 
@@ -58,6 +59,7 @@ function calculatePasswordStrength(password) {
     if (AdvancedMode.checked) {
         if (CommonPassword(password)) {
             PasswordStrength.innerHTML = "Password Strength: " + 0;
+            CommonPasswordText.innerHTML="Common Password";
             return;
         }
     }
@@ -85,21 +87,13 @@ function calculatePasswordStrength(password) {
 
 function CommonPassword(Password) {
 
-    let CommonPasswords = require('./CommonPasswords.json'); //(with path)
-    let count = 0
+    let CommonPasswords = require('./CommonPasswords.json'); 
     for (const index in CommonPasswords) {
-        console.log(CommonPasswords[index].length);
-        if (CommonPasswords[index].length < 8) {
-            console.log(CommonPasswords[index] + "---" + CommonPasswords[index].length);
-            count++;
-        }
         if (CommonPasswords[index] == Password) {
             console.log("matches");
             return true;
         }
-        // console.log(CommonPasswords[index]);
     }
-    console.log("less than 8 letters" + count);
     return false;
 
 }
