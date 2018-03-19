@@ -66,10 +66,10 @@
 
           <div class=" orange col m4 card small">
             <h5 id="Warning">Warnings</h5>
+            <h5 id="CommonPassword"></h5>
           </div>
         </div>
       </div>
-
     </center>
   </div>
 
@@ -86,7 +86,7 @@
     };
 
     function checkPassword() {
-      calculatePasswordStrength(document.getElementById("PasswordField"));
+      calculatePasswordStrength(document.getElementById("PasswordField").value);
     };
   </script>
 </body>
