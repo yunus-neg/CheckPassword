@@ -1,73 +1,42 @@
-
-function PasswordCheck() {
-
-    //test password strings
-    let strPasswords = [
-        "password",
-        "password1a",
-        "password01",
-        "Password01",
-        "P@ssword01",
-        "abcd",
-        "mypassword",
-        "00000000",
-        "AlphaRomeo4c",
-        "fiatlinea2014",
-        "F@rd1co",
-        "F@rd1coSports",
-        "Suzuki@lpha2016",
-        "!vwvento2015",
-        "!@#$%^&*Aa1",
-        "myDream1@$$",
-        "HelloWorld@001!"
-    ];
-
-    console.log("Java check password strength example passwords");
-    for (let index in strPasswords)
-        console.log(strPasswords[index] + ": " + calculatePasswordStrength(strPasswords[index]));
-
-};
+let FoundInCommonpassword=false;
 
 let PasswordStrength = document.getElementById("PasswordStrength");
 let PasswordField = document.getElementById("PasswordField");
 let AdvancedMode = document.getElementById("AdvancedMode");
-let progressBar=document.getElementById("progressBar");
+let progressBar = document.getElementById("progressBar");
 
 let Digit = document.getElementById("Digit");
 let LowerCaseLetter = document.getElementById("LowerCaseLetter");
 let UpperCaseLetter = document.getElementById("UpperCaseLetter");
 let SpecialCharacter = document.getElementById("SpecialCharacter");
 
+let WarningBox=document.getElementById("WarningBox");
 let Warning = document.getElementById("Warning");
-let CommonPasswordText=document.getElementById("CommonPassword");
+let CommonPasswordText = document.getElementById("CommonPassword");
 
 function calculatePasswordStrength(password) {
-    CommonPasswordText.innerHTML="";
+    CommonPasswordText.innerHTML = "";
     //total score of password
-    let PasswordScore = 0;
+    let PasswordScore = 1;
 
-    
+
 
     CountPassword(password);
 
     if (password.length < 8) {
         PasswordStrength.innerHTML = "Password Strength: " + 0;
-        progressBar.style.width="0%";
+        progressBar.style.width = "0%";
         return;
     }
     else if (password.length >= 10)
-        PasswordScore += 2;
-    else
         PasswordScore += 1;
+    
 
-    if (AdvancedMode.checked) {
-        if (CommonPassword(password)) {
-            PasswordStrength.innerHTML = "Password Strength: " + 0;
-            progressBar.style.width="0%";
-            CommonPasswordText.innerHTML="Common Password";
-            return;
-        }
+
+    if (FoundInCommonpassword) {
+        PasswordScore--;
     }
+
 
     //if it contains one digit, add 2 to total score
     if (password.match("(?=.*[0-9]).*"))
@@ -86,8 +55,8 @@ function calculatePasswordStrength(password) {
         PasswordScore += 2;
 
     PasswordStrength.innerHTML = "Password Strength: " + PasswordScore;
-    progressBar.style.width=PasswordScore*10+"%";
-
+    progressBar.style.width = PasswordScore * 10 + "%";
+    progressBar.style.backgroundColor="rgb(0, "+Math.floor(2.55*(10*PasswordScore))+", 0)";
 
 }
 
@@ -98,10 +67,11 @@ function CommonPassword(Password) {
     for (const index in CommonPasswords) {
         if (CommonPasswords[index] == Password) {
             console.log("matches");
-            return true;
+            FoundInCommonpassword=true;
+            return;
         }
     }
-    return false;
+    FoundInCommonpassword=false;
 
 }
 
@@ -130,20 +100,25 @@ function CountPassword(Password) {
     UpperCaseLetter.innerHTML = "Upper case letteres: " + UpperCaseLetterCount;
     SpecialCharacter.innerHTML = "Special Characteres: " + SpecialCharacterCount;
 
-    if (DigitCount < 1 || LowerCaseLetterCount < 1 || UpperCaseLetterCount < 1 || SpecialCharacterCount < 1)
-        WarningCheck(DigitCount, LowerCaseLetterCount, UpperCaseLetterCount, SpecialCharacterCount);
-    else
-        Warning.innerHTML = "Warning<br>None";
+    CommonPassword(Password);
+
+    if (DigitCount < 1 || LowerCaseLetterCount < 1 || UpperCaseLetterCount < 1 || SpecialCharacterCount < 1 || Password.length<8)
+        WarningCheck(DigitCount, LowerCaseLetterCount, UpperCaseLetterCount, SpecialCharacterCount,Password);
+    else{
+        WarningBox.hidden=true;
+    }
 }
 
-function WarningCheck(DigitCount, LowerCaseLetterCount, UpperCaseLetterCount, SpecialCharacterCount) {
-
+function WarningCheck(DigitCount, LowerCaseLetterCount, UpperCaseLetterCount, SpecialCharacterCount,Password) {
+    WarningBox.hidden=false;
     let NewWarning = "Warning<br>";
 
-    DigitCount < 1 ? NewWarning+="digits<br>":"";
-    LowerCaseLetterCount <1 ? NewWarning+="Lower Case Letter<br>":"";
-    UpperCaseLetterCount <1 ? NewWarning+="Upper Case Letter<br>":"";
-    SpecialCharacterCount <1 ? NewWarning+="Special Character<br>":"";
+    Password.length <8 ?NewWarning+="Less than 8 charcters<br>":"";
+    FoundInCommonpassword ? NewWarning+="Common Passwrod<br>" :"";
+    DigitCount < 1 ? NewWarning += "digits<br>" : "";
+    LowerCaseLetterCount < 1 ? NewWarning += "Lower Case Letter<br>" : "";
+    UpperCaseLetterCount < 1 ? NewWarning += "Upper Case Letter<br>" : "";
+    SpecialCharacterCount < 1 ? NewWarning += "Special Character<br>" : "";
 
-    Warning.innerHTML=NewWarning;
+    Warning.innerHTML = NewWarning;
 }
