@@ -31,6 +31,7 @@ function PasswordCheck() {
 let PasswordStrength = document.getElementById("PasswordStrength");
 let PasswordField = document.getElementById("PasswordField");
 let AdvancedMode = document.getElementById("AdvancedMode");
+let progressBar=document.getElementById("progressBar");
 
 let Digit = document.getElementById("Digit");
 let LowerCaseLetter = document.getElementById("LowerCaseLetter");
@@ -43,22 +44,26 @@ let CommonPasswordText=document.getElementById("CommonPassword");
 function calculatePasswordStrength(password) {
     CommonPasswordText.innerHTML="";
     //total score of password
-    let iPasswordScore = 0;
+    let PasswordScore = 0;
+
+    
 
     CountPassword(password);
 
     if (password.length < 8) {
         PasswordStrength.innerHTML = "Password Strength: " + 0;
+        progressBar.style.width="0%";
         return;
     }
     else if (password.length >= 10)
-        iPasswordScore += 2;
+        PasswordScore += 2;
     else
-        iPasswordScore += 1;
+        PasswordScore += 1;
 
     if (AdvancedMode.checked) {
         if (CommonPassword(password)) {
             PasswordStrength.innerHTML = "Password Strength: " + 0;
+            progressBar.style.width="0%";
             CommonPasswordText.innerHTML="Common Password";
             return;
         }
@@ -66,21 +71,23 @@ function calculatePasswordStrength(password) {
 
     //if it contains one digit, add 2 to total score
     if (password.match("(?=.*[0-9]).*"))
-        iPasswordScore += 2;
+        PasswordScore += 2;
 
     //if it contains one lower case letter, add 2 to total score
     if (password.match("(?=.*[a-z]).*"))
-        iPasswordScore += 2;
+        PasswordScore += 2;
 
     //if it contains one upper case letter, add 2 to total score
     if (password.match("(?=.*[A-Z]).*"))
-        iPasswordScore += 2;
+        PasswordScore += 2;
 
     //if it contains one special character, add 2 to total score
     if (password.match("(?=.*[~!@#$%^&*()_-]).*"))
-        iPasswordScore += 2;
+        PasswordScore += 2;
 
-    PasswordStrength.innerHTML = "Password Strength: " + iPasswordScore;
+    PasswordStrength.innerHTML = "Password Strength: " + PasswordScore;
+    progressBar.style.width=PasswordScore*10+"%";
+
 
 }
 
