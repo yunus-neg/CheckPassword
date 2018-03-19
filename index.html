@@ -32,14 +32,8 @@
                   </label>
               </div>
               <div class="row">
-                <div class="switch col m6">
-                  <h5>Advanced Mode</h5>
-                  <label>
-                Off
-                <input type="checkbox" id="AdvancedMode">
-                <span class="lever"></span>
-                On
-                </label>
+                <div class="col m6">
+                    <a class="waves-effect waves-light btn-large" onclick='checkPassword()'>Check Password</a>
                 </div>
               </div>
             </div>
@@ -47,7 +41,7 @@
         </div>
       </div>
 
-      <a class="waves-effect waves-light btn-large" onclick='checkPassword()'>Check Password</a>
+
 
       <div class="progress">
         <div class="determinate" id='progressBar' style="width: 0%"></div>
@@ -74,7 +68,6 @@
   </div>
 
   <script src="index.js"></script>
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script>
     function showPassword() {
       var x = document.getElementById("PasswordField");
