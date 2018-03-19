@@ -54,42 +54,9 @@ function calculatePasswordStrength(password) {
     PasswordScore += 2;
 
   PasswordStrength.innerHTML = "Password Strength: " + PasswordScore;
+  progressBarColor(PasswordScore);
   progressBar.style.width = PasswordScore * 10 + "%";
-  progressBar.className = 'determinate';
-  switch (PasswordScore) {
-    case 1:
-      progressBar.className += ' red darken-4';
-      break;
-    case 2:
-      progressBar.className += ' red darken-3';
-      break;
-    case 3:
-      progressBar.className += ' red darken-2';
-      break;
-    case 4:
-      progressBar.className += ' orange darken-3';
-      break;
-    case 5:
-      progressBar.className += ' orange darken-2';
-      break;
-    case 6:
-      progressBar.className += ' orange darken-1';
-      break;
-    case 7:
-    progressBar.className += ' green lighten-2';
-      break;
-    case 8:
-      progressBar.className += ' green';
-      break;
-    case 9:
-      progressBar.className += ' green darken-1';
-      break;
-    case 10:
-      progressBar.className += ' green darken-3';
-      break;
-    default:
 
-  };
 }
 
 
@@ -153,4 +120,42 @@ function WarningCheck(DigitCount, LowerCaseLetterCount, UpperCaseLetterCount, Sp
   SpecialCharacterCount < 1 ? NewWarning += "Special Character<br>" : "";
 
   Warning.innerHTML = NewWarning;
+}
+
+function progressBarColor(PasswordScore){
+    progressBar.className = 'determinate';
+    switch (PasswordScore) {
+      case 1:
+        progressBar.className += ' red darken-4';
+        break;
+      case 2:
+        progressBar.className += ' red darken-3';
+        break;
+      case 3:
+        progressBar.className += ' red darken-2';
+        break;
+      case 4:
+        progressBar.className += ' orange darken-3';
+        break;
+      case 5:
+        progressBar.className += ' orange darken-2';
+        break;
+      case 6:
+        progressBar.className += ' orange darken-1';
+        break;
+      case 7:
+      progressBar.className += ' green lighten-2';
+        break;
+      case 8:
+        progressBar.className += ' green';
+        break;
+      case 9:
+        progressBar.className += ' green darken-1';
+        break;
+      case 10:
+        progressBar.className += ' green darken-3';
+        break;
+      default:
+  
+    };
 }
