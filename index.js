@@ -56,8 +56,8 @@ function calculatePasswordStrength(password) {
 
     PasswordStrength.innerHTML = "Password Strength: " + PasswordScore;
     progressBar.style.width = PasswordScore * 10 + "%";
-    progressBar.style.backgroundColor="rgb(0, "+Math.floor(2.55*(10*PasswordScore))+", 0)";
-
+    progressBar.style.backgroundColor="rgb("+(255-(Math.floor(2.56*(10*PasswordScore)))) +","+Math.floor(2.56*(10*PasswordScore))+",0)";
+    console.log(255-(Math.floor(2.56*(10*PasswordScore))));
 }
 
 
