@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <title>Document</title>
 
 </head>
@@ -15,7 +16,8 @@
 <body class="grey lighten-3">
   <div class="container">
     <center>
-      <h1>PassWord Checker</h1>
+
+      <h1>Password Checker</h1>
       <div class="row">
         <div class="col m12">
           <div class="col m8">
@@ -42,7 +44,7 @@
               </div>
               <div class="row">
                 <div class="col m6">
-                  <a class="waves-effect waves-light btn-large modal-trigger top" href="#modal1">Encrypte</a>
+                  <a class="waves-effect waves-light btn-large modal-trigger top" href="#modal1">hashing</a>
                 </div>
               </div>
             </div>
@@ -61,19 +63,19 @@
       <div class="row">
         <div class="col m12">
           <div class="teal col m4 card small">
-            <h5 id="Digit">Digits:</h5>
-            <h5 id="LowerCaseLetter">lower case letteres:</h5>
-            <h5 id="UpperCaseLetter">Upper case letteres:</h5>
-            <h5 id="SpecialCharacter">Special Characteres:</h5>
-            <h5 id="PasswordLength">Password length:</h5>
+            <h5 id="Digit">Digits: 0</h5>
+            <h5 id="LowerCaseLetter">lower case letteres: 0</h5>
+            <h5 id="UpperCaseLetter">Upper case letteres: 0</h5>
+            <h5 id="SpecialCharacter">Special Characteres: 0</h5>
+            <h5 id="PasswordLength">Password length: 0</h5>
           </div>
 
           <div class=" orange col m4 card small" id="WarningBox" hidden>
             <h5 id="Warning">Warnings</h5>
             <h5 id="CommonPassword"></h5>
           </div>
-          <div class=" orange col m4 push-m4 card small" id="suggestedPasswordBox">
-            <h5>suggested Password</h5>
+          <div class=" cyan col m4 push-m4 card small" id="suggestedPasswordBox">
+            <h5>suggested Password <a href="#"><i class="material-icons" onclick="suggestingPassword()" style="color: black">refresh</i> </a></h5>
             <h6 id="suggestedPassword"></h6>
 
           </div>
@@ -152,8 +154,8 @@
       opacity: .5, // Opacity of modal background
       inDuration: 300, // Transition in duration
       outDuration: 200, // Transition out duration
-      startingTop: '0%', // Starting top style attribute
-      endingTop: '00%', // Ending top style attribute
+      startingTop: '10%', // Starting top style attribute
+      endingTop: '10%', // Ending top style attribute
       ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
       },
     }

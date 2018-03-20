@@ -15,15 +15,11 @@ let PasswordLength = document.getElementById("PasswordLength");
 
 let WarningBox = document.getElementById("WarningBox");
 let Warning = document.getElementById("Warning");
-let CommonPasswordText = document.getElementById("CommonPassword");
 
 let suggestedPassword = document.getElementById("suggestedPassword");
 let suggestedPasswordBox = document.getElementById("suggestedPasswordBox");
 
 function calculatePasswordStrength(password) {
-
-    suggestingPassword();
-    CommonPasswordText.innerHTML = "";
     //total score of password
     let PasswordScore = 0;
 
@@ -126,10 +122,10 @@ function CountPassword(Password) {
     }
 
     if (WarningBox.hidden) {
-        suggestedPasswordBox.className = "orange col m4 push-m4 card small";
+        suggestedPasswordBox.className = "cyan col m4 push-m4 card small";
     }
     else {
-        suggestedPasswordBox.className = "orange col m4  card small";
+        suggestedPasswordBox.className = "cyan col m4  card small";
     }
 }
 
@@ -230,7 +226,7 @@ function suggestingPassword() {
     let NewSuggestedPasswords = "";
 
     for (let i = 0; i < 6; i++) {
-        NewSuggestedPasswords += BestPasswords[Math.floor((Math.random() * 1000000) + 0)] + "<br><br>";
+        NewSuggestedPasswords += BestPasswords[Math.floor((Math.random() * 999999) + 0)] + "<br><br>";
     }
     suggestedPassword.innerHTML = NewSuggestedPasswords;
 }
