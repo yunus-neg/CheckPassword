@@ -11,12 +11,18 @@ let Digit = document.getElementById("Digit");
 let LowerCaseLetter = document.getElementById("LowerCaseLetter");
 let UpperCaseLetter = document.getElementById("UpperCaseLetter");
 let SpecialCharacter = document.getElementById("SpecialCharacter");
+let PasswordLength = document.getElementById("PasswordLength");
 
 let WarningBox = document.getElementById("WarningBox");
 let Warning = document.getElementById("Warning");
 let CommonPasswordText = document.getElementById("CommonPassword");
 
+let suggestedPassword = document.getElementById("suggestedPassword");
+let suggestedPasswordBox = document.getElementById("suggestedPasswordBox");
+
 function calculatePasswordStrength(password) {
+
+    suggestingPassword();
     CommonPasswordText.innerHTML = "";
     //total score of password
     let PasswordScore = 0;
@@ -107,6 +113,7 @@ function CountPassword(Password) {
     LowerCaseLetter.innerHTML = "lower case letteres: " + LowerCaseLetterCount;
     UpperCaseLetter.innerHTML = "Upper case letteres: " + UpperCaseLetterCount;
     SpecialCharacter.innerHTML = "Special Characteres: " + SpecialCharacterCount;
+    PasswordLength.innerHTML = "Password length: " + Password.length;
 
     CommonPassword(Password);
     duplicated(Password);
@@ -117,12 +124,21 @@ function CountPassword(Password) {
     else {
         WarningBox.hidden = true;
     }
+
+    if (WarningBox.hidden) {
+        suggestedPasswordBox.className = "orange col m4 push-m4 card small";
+    }
+    else {
+        suggestedPasswordBox.className = "orange col m4  card small";
+    }
 }
 
 function WarningCheck(DigitCount, LowerCaseLetterCount, UpperCaseLetterCount, SpecialCharacterCount, Password) {
     WarningBox.hidden = false;
     let NewWarning = "Warning<br>";
-
+    if (Password == "") {
+        WarningBox.hidden = true;
+    }
     if (Password.length < 8) {
         NewWarning += "Less than 8 charcters<br>";
         Warning.innerHTML = NewWarning;
@@ -133,8 +149,8 @@ function WarningCheck(DigitCount, LowerCaseLetterCount, UpperCaseLetterCount, Sp
         Warning.innerHTML = NewWarning;
         return;
     }
-    FoundDuplicated? NewWarning+="Duplicated<br>":"";
-    FoundSequence? NewWarning+="Have Sequence<br>":"";
+    FoundDuplicated ? NewWarning += "Duplicated<br>" : "";
+    FoundSequence ? NewWarning += "Have Sequence<br>" : "";
     DigitCount < 1 ? NewWarning += "digits<br>" : "";
     LowerCaseLetterCount < 1 ? NewWarning += "Lower Case Letter<br>" : "";
     UpperCaseLetterCount < 1 ? NewWarning += "Upper Case Letter<br>" : "";
@@ -208,3 +224,15 @@ function HaveSequence(Password) {
     }
     FoundSequence = false;
 }
+
+function suggestingPassword() {
+    let BestPasswords = require("./BestPasswords.json");
+    let NewSuggestedPasswords = "";
+
+    for (let i = 0; i < 6; i++) {
+        NewSuggestedPasswords += BestPasswords[Math.floor((Math.random() * 1000000) + 0)] + "<br><br>";
+    }
+    suggestedPassword.innerHTML = NewSuggestedPasswords;
+}
+
+suggestingPassword();
