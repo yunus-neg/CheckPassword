@@ -1,3 +1,7 @@
+$('#PasswordField').bind('input propertychange', function () {
+    calculatePasswordStrength(this.value);
+})
+
 let FoundInCommonpassword = false;
 let FoundSequence = false;
 let FoundDuplicated = false;
@@ -44,10 +48,6 @@ function calculatePasswordStrength(password) {
     if (!FoundDuplicated)
         PasswordScore++;
 
-
-
-
-
     //if it contains one digit, add 2 to total score
     if (password.match("(?=.*[0-9]).*"))
         PasswordScore += 2;
@@ -74,13 +74,13 @@ function calculatePasswordStrength(password) {
 function CommonPassword(Password) {
 
     let CommonPasswords = require('./CommonPasswords.json');
-    for (const index in CommonPasswords) {
-        if (CommonPasswords[index] == Password) {
-            console.log("matches");
-            FoundInCommonpassword = true;
-            return;
-        }
+
+    if (CommonPasswords.includes(Password)) {
+        console.log("matches");
+        FoundInCommonpassword = true;
+        return;
     }
+
     FoundInCommonpassword = false;
 
 }
@@ -110,8 +110,9 @@ function CountPassword(Password) {
     UpperCaseLetter.innerHTML = "Upper case letteres: " + UpperCaseLetterCount;
     SpecialCharacter.innerHTML = "Special Characteres: " + SpecialCharacterCount;
     PasswordLength.innerHTML = "Password length: " + Password.length;
-
+    console.time("Common");
     CommonPassword(Password);
+    console.timeEnd("Common");
     duplicated(Password);
     HaveSequence(Password);
 
