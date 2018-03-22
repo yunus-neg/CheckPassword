@@ -21,9 +21,9 @@
       <div class="row">
         <div class="col m12">
           <div class="col m12">
-            <input type="password" id="PasswordField"  placeholder="password">
+            <input type="password" id="PasswordField" placeholder="password">
           </div>
-          
+
 
         </div>
       </div>
@@ -42,7 +42,7 @@
               </div>
               <div class="row">
                 <div class="col m6">
-                  <a class="waves-effect waves-light btn-large modal-trigger top" href="#modal1">hashing</a>
+                  <a class="waves-effect waves-light btn-large modal-trigger top" href="#modal1">Encryption</a>
                 </div>
               </div>
             </div>
@@ -85,36 +85,52 @@
       <div id="modal1" class="modal modal-fixed-footer">
         <div class="modal-content">
 
-
+          <h2>Encryption</h2>
+          <!-- AES row -->
+          <div class="row">
+            <div>
+              <h4>AES</h4>
+              <pre id="aes-output" class="card-panel grey lighten-3"></pre>
+            </div>
+          </div>
+          <!-- DES row -->
+          <div class="row">
+            <div>
+              <h4>DES</h4>
+              <pre id="des-output" class="card-panel grey lighten-3"></pre>
+            </div>
+          </div>
+          <br>
+          <h2>hashing</h2>
           <!-- MD5 row -->
           <div class="row">
             <div class="">
-              <h4 class="hash-heading">MD5</h4>
-              <pre id="md5-output" class="hash-output"> </pre>
+              <h4 class="">MD5</h4>
+              <pre id="md5-output" class="card-panel grey lighten-3"></pre>
             </div>
           </div>
 
           <!-- SHA-1 row -->
           <div class="row">
             <div class="">
-              <h4 class="hash-heading">SHA-1</h4>
-              <pre id="sha1-output" class="hash-output"> </pre>
+              <h4 class="">SHA-1</h4>
+              <pre id="sha1-output" class="card-panel grey lighten-3"> </pre>
             </div>
           </div>
 
           <!-- SHA-256 row -->
           <div class="row">
             <div class="">
-              <h4 class="hash-heading">SHA-256</h4>
-              <pre id="sha256-output" class="hash-output"> </pre>
+              <h4 class="">SHA-256</h4>
+              <pre id="sha256-output" class="card-panel grey lighten-3"> </pre>
             </div>
           </div>
 
           <!-- SHA-512 row -->
           <div class="row">
             <div class="">
-              <h4 class="hash-heading">SHA-512</h4>
-              <pre id="sha512-output" class="hash-output"> </pre>
+              <h4 class="">SHA-512</h4>
+              <pre id="sha512-output" class="card-panel grey lighten-3"> </pre>
             </div>
           </div>
         </div>
@@ -124,7 +140,13 @@
       </div>
     </center>
   </div>
-  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+  </script>
   <script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.js"></script>
   <script sre="node_modules\jquery\dist\jquery.min.js"></script>
   <script src="index.js"></script>
@@ -151,19 +173,24 @@
       outDuration: 200, // Transition out duration
       startingTop: '10%', // Starting top style attribute
       endingTop: '10%', // Ending top style attribute
-      ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
       },
-    }
-    );
+    });
 
     $(() => {
       const crypto = require('crypto')
+      $('#PasswordField').bind('input propertychange', function() {
+        const text = this.value;
+        const key = 'qassim university';
 
-      $('#PasswordField').bind('input propertychange', function () {
-        const text = this.value
+        // Encryption
+        const aes256 = crypto.createCipher('aes-256-ctr', key).update(text, 'utf8', 'hex')
+        $('#aes-output').text(aes256)
 
+        const des3 = crypto.createCipher('des3', key).update(text, 'utf8', 'hex')
+        $('#des-output').text(des3)
 
-
+        // Hashing
         const md5 = crypto.createHash('md5').update(text, 'utf8').digest('hex')
         $('#md5-output').text(md5)
 
@@ -175,12 +202,11 @@
 
         const sha512 = crypto.createHash('sha512').update(text, 'utf8').digest('hex')
         $('#sha512-output').text(sha512)
+
+
       })
 
     })
-
-
-
   </script>
 </body>
 
