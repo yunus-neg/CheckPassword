@@ -9,6 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="node_modules/clipboard/dist/clipboard.min.js"></script>
+
   <title>Document</title>
 
 </head>
@@ -23,7 +25,6 @@
           <div class="col m12">
             <input type="password" id="PasswordField" placeholder="password">
           </div>
-
 
         </div>
       </div>
@@ -42,7 +43,7 @@
               </div>
               <div class="row">
                 <div class="col m6">
-                  <a class="waves-effect waves-light btn-large modal-trigger top" href="#modal1">Encryption</a>
+                  <a class="waves-effect waves-light btn-large modal-trigger top" href="#modal1" data-target="modal1">Encryption</a>
                 </div>
               </div>
             </div>
@@ -67,14 +68,19 @@
             <h5 id="SpecialCharacter">Special Characteres: 0</h5>
             <h5 id="PasswordLength">Password length: 0</h5>
           </div>
+          <img src="./assets/gif/Clapping.gif" id="ClappingImg" class="col m4 card small " alt="Clapping" style="display: none;background: transparent"></img>
 
           <div class=" orange col m4 card small" id="WarningBox" hidden>
             <h5 id="Warning">Warnings</h5>
             <h5 id="CommonPassword"></h5>
           </div>
           <div class=" cyan col m4 push-m4 card small" id="suggestedPasswordBox">
-            <h5>suggested Password <a href="#"><i class="material-icons" onclick="suggestingPassword()" style="color: black">refresh</i> </a></h5>
-            <h6 id="suggestedPassword"></h6>
+            <h5>suggested Password
+              <a href="#">
+                <i class="material-icons" onclick="suggestingPassword()" style="color: black">refresh</i>
+              </a>
+            </h5>
+            <h6 id="suggestedPassword" style="font-size: larger"></h6>
 
           </div>
         </div>
@@ -82,7 +88,7 @@
       <!-- Modal Trigger -->
 
       <!-- Modal Structure -->
-      <div id="modal1" class="modal modal-fixed-footer">
+      <div id="modal1" class="modal modal-fixed-footer bottom-sheet">
         <div class="modal-content">
 
           <h2>Encryption</h2>
@@ -148,8 +154,10 @@
     }
   </script>
   <script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.js"></script>
-  <script sre="node_modules\jquery\dist\jquery.min.js"></script>
-  <script src="index.js"></script>
+  <script src="node_modules\jquery\dist\jquery.min.js"></script>
+  <script src="assets/js/index.js"></script>
+  <script src="assets/js/crypto.js"></script>
+
   <script>
     function showPassword() {
       var x = document.getElementById("PasswordField");
@@ -160,53 +168,11 @@
       };
     };
 
-
-    //     $(document).ready(function(){
-    //   // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-    //   $('.modal').modal();
-    // });
-
-    $('.modal').modal({
-      dismissible: true, // Modal can be dismissed by clicking outside of the modal
-      opacity: .5, // Opacity of modal background
-      inDuration: 300, // Transition in duration
-      outDuration: 200, // Transition out duration
-      startingTop: '10%', // Starting top style attribute
-      endingTop: '10%', // Ending top style attribute
-      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-      },
-    });
-
-    $(() => {
-      const crypto = require('crypto')
-      $('#PasswordField').bind('input propertychange', function() {
-        const text = this.value;
-        const key = 'qassim university';
-
-        // Encryption
-        const aes256 = crypto.createCipher('aes-256-ctr', key).update(text, 'utf8', 'hex')
-        $('#aes-output').text(aes256)
-
-        const des3 = crypto.createCipher('des3', key).update(text, 'utf8', 'hex')
-        $('#des-output').text(des3)
-
-        // Hashing
-        const md5 = crypto.createHash('md5').update(text, 'utf8').digest('hex')
-        $('#md5-output').text(md5)
-
-        const sha1 = crypto.createHash('sha1').update(text, 'utf8').digest('hex')
-        $('#sha1-output').text(sha1)
-
-        const sha256 = crypto.createHash('sha256').update(text, 'utf8').digest('hex')
-        $('#sha256-output').text(sha256)
-
-        const sha512 = crypto.createHash('sha512').update(text, 'utf8').digest('hex')
-        $('#sha512-output').text(sha512)
+    var elem = document.querySelector('.modal');
+    var modal = M.Modal.init(elem, { opacity: 0.5 });
 
 
-      })
 
-    })
   </script>
 </body>
 
