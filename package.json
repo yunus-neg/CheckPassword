@@ -10,6 +10,7 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^1.8.2",
+    "electron-packager": "^11.2.0",
     "electron-reload": "^1.2.2"
   },
   "dependencies": {

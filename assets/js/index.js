@@ -41,11 +41,15 @@ function calculatePasswordStrength(password) {
     if (password.length < 8) {
         PasswordStrength.innerHTML = "Password Strength: " + 0;
         progressBar.style.width = "0%";
+        ClappingFunc(PasswordScore);
+
         return;
     }
     if (FoundInCommonpassword) {
         PasswordStrength.innerHTML = "Password Strength: " + 0;
         progressBar.style.width = "0%";
+        ClappingFunc(PasswordScore);
+
         return;
     }
 
@@ -74,13 +78,8 @@ function calculatePasswordStrength(password) {
     PasswordStrength.innerHTML = "Password Strength: " + PasswordScore;
     progressBarColor(PasswordScore);
     progressBar.style.width = PasswordScore * 10 + "%";
-    if (PasswordScore == 10) {
-        ClappingImg.style.display = "";
-        suggestedPasswordBox.className = "cyan col m4  card small";
-    }
-    else {
-        ClappingImg.style.display = "none";
-    }
+
+    ClappingFunc(PasswordScore);
 
 }
 
@@ -267,4 +266,19 @@ function UpdateToolTip() {
 
     var elem = document.querySelectorAll('.tooltipped');
     var instance = M.Tooltip.init(elem);
+}
+
+function ClappingFunc(PasswordScore) {
+    if (PasswordScore == 10) {
+        ClappingImg.style.display = "";
+        suggestedPasswordBox.className = "cyan col m4  card small";
+        console.log("show" + "||" + ClappingImg.style.display);
+
+    }
+    else {
+
+        ClappingImg.style.display = "none";
+        console.log("hidden" + "||" + ClappingImg.style.display);
+
+    }
 }
