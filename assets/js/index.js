@@ -123,6 +123,7 @@ function CountPassword(Password) {
     UpperCaseLetter.innerHTML = "Upper case letteres: " + UpperCaseLetterCount;
     SpecialCharacter.innerHTML = "Special Characteres: " + SpecialCharacterCount;
     PasswordLength.innerHTML = "Password length: " + Password.length;
+
     CommonPassword(Password);
     duplicated(Password);
     HaveSequence(Password);
@@ -237,8 +238,8 @@ function suggestingPassword() {
     let NewSuggestedPasswords = "";
 
     for (let i = 0; i < 5; i++) {
-        let ChosenPassword = BestPasswords[Math.floor((Math.random() * 999999) + 0)];
-        NewSuggestedPasswords += ChosenPassword + '<a href="#"><i class="material-icons right tooltipped" onclick="CopyPassword(this)" Password=' + ChosenPassword + ' style="color: black" data-position="right" data-tooltip="copy me">content_copya</i> </a>' + "<br><br>";
+        let ChoosenPassword = BestPasswords[Math.floor((Math.random() * 999999) + 0)];
+        NewSuggestedPasswords += ChoosenPassword + '<a href="#"><i class="material-icons right tooltipped" onclick="CopyPassword(this)" Password=' + ChoosenPassword + ' style="color: black" data-position="right" data-tooltip="copy me">content_copya</i> </a>' + "<br><br>";
     }
     suggestedPassword.innerHTML = NewSuggestedPasswords;
 
